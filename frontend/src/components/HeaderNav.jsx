@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Navbar, NavDropdown, Nav } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import CategoryServicas from '../../services/categoryServices'
+import CategoryServicas from '../services/categoryServices'
 
 export const HeaderNav = (props) => {
 
@@ -34,23 +34,11 @@ export const HeaderNav = (props) => {
       </Nav> : <Nav className="me-auto">
         {props.role === 'admin' || props.role === 'lecturer' ? <Nav.Link href="/addCourse"  >Add a course</Nav.Link> : null}
         {props.role === 'admin' ? <Nav.Link href="/admin/accounts" >Manage accounts</Nav.Link> : null}
-        <NavDropdown title="Dropdown" id="basic-nav-dropdown" >
-        { categories.map(item =>{
-
-          return(
-
-            <NavDropdown.Item className='text-center' href={`/filtered/${item._id}`} key={item._id}>{item.name}</NavDropdown.Item>
-
-          )
-
-        })}
         {
 
-          props.role === 'admin' ? <NavDropdown.Item className='text-center' href="/category/edit" >edit categories</NavDropdown.Item> : null
+          props.role === 'admin' ? <Nav.Link href="/category/edit" >edit categories</Nav.Link> : null
 
         }
-        
-      </NavDropdown>
         <Nav.Link href="/" onClick={() =>{
 
           localStorage.clear()

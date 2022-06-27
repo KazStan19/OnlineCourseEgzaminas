@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { Col,Container,Form,Row } from 'react-bootstrap'
-
-
-import userServices from '../../../services/userServices'
+import userServices from '../../services/userServices'
 
 export const UpadateAcc = (props) => {
 

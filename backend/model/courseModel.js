@@ -35,10 +35,14 @@ const courseSchema = mongoose.Schema({
 
     },likes:[{
 
-        type:mongoose.Schema.Types.ObjectId,
-        ref: 'Users'
+        type:String,
 
-    }]
+    }],likeCount:{
+
+        type:Number,
+        default: 0
+
+    }
 
 
 },{

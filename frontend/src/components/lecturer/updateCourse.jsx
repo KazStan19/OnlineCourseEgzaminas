@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 
-import CategoryServicas from '../../../../services/categoryServices'
-import CourseServices from '../../../../services/courseServices'
-import { LoadingPage } from '../../loadingPage'
+import CategoryServicas from '../../services/categoryServices'
+import CourseServices from '../../services/courseServices'
+import { LoadingPage } from '../loadingPage'
 
-export const AddCourse = (props) => {
+export const UpdateCourse = (props) => {
 
   const [categories, setCategories] = useState([])
   const [loading, setLoading] = useState(true)
   const [userInfo, setUserInfo] = useState({
 
-    user: props.userId,
-    category: "Open this select menu",
-    desc: '',
-    title: '',
-    price: '',
-    
+    category: props.course.categorie._id,
+    desc: props.course.desc,
+    title: props.course.title,
+    price: props.course.price,
 
   })
 
@@ -48,7 +46,7 @@ export const AddCourse = (props) => {
   const onSubmit = (e) => {
 
     e.preventDefault()
-    CourseServices.addCourse(props.role,user,category,desc,title,price)
+    CourseServices.updateCourse(props.course._id,props.role,category,desc,title,price)
 
   }
   
@@ -80,7 +78,6 @@ export const AddCourse = (props) => {
       <Form.Group as={Col} controlId="formGrid2Category">
         <Form.Label>Select category</Form.Label>
         <Form.Select required value={category} name='category' onChange={onChange} aria-label="Default select example">
-          <option disabled value='Open this select menu'>Open this select menu</option>
           {categories.map(item =>{
 
             return(

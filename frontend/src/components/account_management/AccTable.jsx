@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap'
-import userServices from '../../../services/userServices'
+import userServices from '../../services/userServices'
 import { LoadingPage } from '../loadingPage'
 import { UpadateAcc } from './UpdateAcc'
 

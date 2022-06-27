@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap'
-
-import CategoryServicas from '../../../../services/categoryServices'
-import { LoadingPage } from '../../loadingPage'
+import CategoryServicas from '../../services/categoryServices'
+import { LoadingPage } from '../loadingPage'
 
 export const ListCategory = (props) => {
 

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Card, CardGroup, Col, Container, Row } from 'react-bootstrap'
+import { Button, Card, Col, Container, Row } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
-import courseServices from '../../services/courseServices'
+import CourseServices from '../services/courseServices'
 import { LoadingPage } from './loadingPage'
-import { AiOutlineRest , AiFillEdit} from "react-icons/ai";
-import { UpdateCourse } from './admin/course_category/updateCourse'
-import UserServices from '../../services/userServices'
+import { AiOutlineRest , AiFillEdit ,AiFillLike} from "react-icons/ai";
+import { UpdateCourse } from './lecturer/updateCourse'
+import UserServices from '../services/userServices'
 
 function LandingPage(props) {
   
@@ -19,7 +19,7 @@ function LandingPage(props) {
 
     setLoading(true)
 
-    courseServices.getCourses()
+    CourseServices.getCourses()
     .then(course =>{
 
       if(categoryID === undefined)setData(course)
@@ -33,13 +33,9 @@ function LandingPage(props) {
 
   const deleteHandler = (key) => {
 
-    courseServices.deleteCourse(key,props.user.role)
+    CourseServices.deleteCourse(key,props.user.role)
 
   }
-
-
-
-
 
   if(loading === true){
 
@@ -51,10 +47,9 @@ function LandingPage(props) {
     return updateToggle === false ? <Container>
       <Row xs={1} md={2} className="g-4">
       {data.map(item =>{
-
         return(
           <Col key={item._id}>
-          <Card>
+          <Card >
             {props.loginState === true && props.user._id === item.user._id || props.user.role === 'admin' ? <div className='w-100 d-flex bg-dark justify-content-end'>
               <a href='#' className='text-white' onClick={(e)=>{
 
@@ -77,7 +72,7 @@ function LandingPage(props) {
             {item.title}
             </Card.Header>
             <Card.Body>
-              <Card.Title>{item.categorie.name}</Card.Title>
+              <Card.Title >{item.categorie.name}</Card.Title>
               <Card.Text>
               {item.desc}
               </Card.Text>
@@ -101,6 +96,14 @@ function LandingPage(props) {
                 }}>Cancal</Button>:null
               }
               </Card.Body>
+              {props.loginState === true && props.user._id === item.user._id || props.user.role === 'admin' ? <div className='w-100 d-flex bg-dark justify-content-end'>
+              <a href='#' className='text-white text-decoration-none' onClick={(e)=>{
+
+                e.preventDefault()
+                if(item.likes.includes(props.user._id) === true)CourseServices.likeCourse(item._id,props.user._id,'minus')
+                else CourseServices.likeCourse(item._id,props.user._id,'plus')
+              }}><AiFillLike/>{item.likeCount}</a>
+            </div>:null}
             </Card>
             </Col>
         )

@@ -130,6 +130,40 @@ const deleteCourses = asyncHanlder(async(req,res) =>{
     res.status(200).json(req.params.id)
 })
 
+// @desc like a specific course
+// @route put /api/like
+// @access privite
+
+const likeCourse = asyncHanlder(async(req,res) =>{
+    const course = await Course.findById(req.params.id)
+    
+    if(!course){
+
+        res.status(400)
+        throw new Error('Course is not found')
+
+    }
+
+    if(req.body.action === 'minus'){
+
+    const updatedCourseList = course.likes.filter(item => item !== req.user.id) 
+
+    const likesUpdated = await Course.findByIdAndUpdate(req.params.id,{likes:updatedCourseList,likeCount:course.likeCount-1},{ new:true })
+    
+    res.status(200).json(likesUpdated)
+
+    return
+    
+    }    
+
+    const likesUpdated = await Course.findByIdAndUpdate(req.params.id,{likes:[...course.likes,req.body.userId],likeCount:course.likeCount+1},{ new:true })
+        
+    res.status(200).json(likesUpdated)
+
+    return
+
+})
+
 module.exports = {
-    getCourses,postCourses,updateCourses,deleteCourses
+    likeCourse,getCourses,postCourses,updateCourses,deleteCourses
 }

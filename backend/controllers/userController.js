@@ -205,7 +205,7 @@ const updateUser = asyncHanlder(async(req,res) =>{
     if(!firstName || !lastName || !email || !role){
 
         res.status(400)
-        throw new Error("please fill in text fields")
+        throw new Error("please fill in empty fields")
 
     }
 
@@ -226,7 +226,7 @@ const deleteUser = asyncHanlder(async(req,res) =>{
     if(!user){
 
         res.status(400)
-        throw new Error('Category is not found')
+        throw new Error('user is not found')
 
     }
 

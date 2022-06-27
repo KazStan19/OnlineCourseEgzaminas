@@ -14,7 +14,6 @@ class CourseServices {
 
                 authorization: token,
 
-
             }
             
         
@@ -83,6 +82,26 @@ class CourseServices {
 
             }
             
+        
+        }).then(() =>{
+
+            window.location.reload()
+
+        })
+
+    }
+
+    likeCourse = (id,userId,action) =>{
+
+        let token = `Bearer ${JSON.parse(localStorage.getItem("user")).token}`
+
+        axios.put(`http://localhost:5000/api/like/${id}`,{userId:userId,action:action},{
+
+            "headers":{
+
+                authorization: token,
+
+            }
         
         }).then(() =>{
 

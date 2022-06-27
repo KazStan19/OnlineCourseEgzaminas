@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {Button, Container, Form} from 'react-bootstrap'
-import userServices from '../../services/userServices'
+import userServices from '../services/userServices'
 import { useNavigate } from 'react-router-dom'
 
 function Login(props) {

@@ -1,15 +1,15 @@
 import {BrowserRouter,Routes,Route} from "react-router-dom";
-import LandingPage from "./components/main/LandingPage";
-import Register from "./components/main/register/Register";
-import Login from "./components/main/Login";
+import LandingPage from "./components/LandingPage";
+import Register from "./components/register/Register";
+import Login from "./components/Login";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { HeaderNav } from "./components/main/HeaderNav";
-import { ErrorPage } from "./components/main/ErrorPage";
+import { HeaderNav } from "./components/HeaderNav";
+import { ErrorPage } from "./components/ErrorPage";
 import { useEffect, useState } from "react";
-import { LoadingPage } from "./components/main/loadingPage";
-import { AddCourse } from "./components/main/admin/course_category/addCourse";
-import { ListCategory } from "./components/main/admin/course_category/listCategory";
-import { AccTable } from "./components/main/account_management/AccTable";
+import { LoadingPage } from "./components/loadingPage";
+import { AddCourse } from "./components/lecturer/addCourse";
+import { ListCategory } from "./components/admin/listCategory";
+import { AccTable } from "./components/account_management/AccTable";
 
 
 
