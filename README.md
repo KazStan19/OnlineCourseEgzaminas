@@ -25,8 +25,6 @@ A port can be any number you so choice (it can be 5000, 8080 and etc.)
 
 - Add a string of later or number to `JWT_SECRET` section (the longer the string the better)
 
-- ### Create a database
-
 Next you'll need connection string from https://cloud.mongodb.com/. To do this first you need to create a new database, you can do so by following the steps below.
 
 - ### Create a database
