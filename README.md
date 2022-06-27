@@ -58,8 +58,8 @@ To start the application you must be in the root folder
 
 ### To add a admin account
 
-
 - when creating admin you must make `ADMIN_PASS` in `.env`
 
 or
-Using `Postman`
+
+- Use `Postman`
