@@ -33,7 +33,12 @@ const courseSchema = mongoose.Schema({
         type: Number,
         required: true
 
-    }
+    },likes:[{
+
+        type:mongoose.Schema.Types.ObjectId,
+        ref: 'Users'
+
+    }]
 
 
 },{
