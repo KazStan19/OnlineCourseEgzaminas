@@ -95,7 +95,7 @@ class CourseServices {
 
         let token = `Bearer ${JSON.parse(localStorage.getItem("user")).token}`
 
-        axios.put(`http://localhost:5000/api/like/${id}`,{userId:userId,action:action},{
+        return axios.put(`http://localhost:5000/api/like/${id}`,{userId:userId,action:action},{
 
             "headers":{
 
@@ -105,7 +105,8 @@ class CourseServices {
         
         }).then(() =>{
 
-            window.location.reload()
+            //window.location.reload()
+            return
 
         })
 

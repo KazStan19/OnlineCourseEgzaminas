@@ -11,7 +11,7 @@ const User = require('../model/userModel')
 
 const registerUser = asyncHanlder(async(req,res) =>{
 
-    const {firstName,lastName,email,password,role} = req.body
+    const {firstName,lastName,email,password,role,adminPass} = req.body
 
     if(!firstName || !lastName || !email || !password || !role){
 
@@ -26,6 +26,13 @@ const registerUser = asyncHanlder(async(req,res) =>{
 
         res.status(400)
         throw new Error('user exists')
+
+    }
+
+    if(role === 'admin' && adminPass !== process.env.ADMIN_PASS && !adminPass){
+
+        res.status(400)
+        throw new Error('wrong admin password / or none egzisting')
 
     }
 

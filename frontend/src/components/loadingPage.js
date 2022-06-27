@@ -7,6 +7,7 @@ export const LoadingPage = () => {
     <div className="spinner-border" role="status">
       <span className="visually-hidden">Loading...</span>
     </div>
+    {'   '}
     <h1>Lodding page...</h1>
     </Container>
   )

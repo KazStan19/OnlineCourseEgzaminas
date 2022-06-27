@@ -1,13 +1,10 @@
-
-
 import React, { useState } from 'react'
-import { Col,Form,Row } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
+import { Col, Form, Row } from 'react-bootstrap'
 
 import userServices from '../../services/userServices'
 
-export const UserForm = () => {
-  const navigate = useNavigate()
+export const AdminForm = () => {
+
   const [userInfo, setUserInfo] = useState({
 
     firstName: '',
@@ -15,16 +12,15 @@ export const UserForm = () => {
     email: '',
     password: '',
     password2: '',
-    role: 'user',
+    role: 'admin',
     admin: ''
 
   })
 
+  const {firstName,lastName, email, password, password2,role,admin} = userInfo
   
 
 
-  const {firstName,lastName, email, password, password2,role} = userInfo
-  
   const onChange = (e) => {
 
     setUserInfo((prevState) => ({
@@ -42,9 +38,9 @@ export const UserForm = () => {
 
     if(password === password2){
 
-      userServices.registerUser(firstName,lastName, email, password,role)
+      userServices.registerUser(firstName,lastName, email, password,role,admin)
       
-
+      
     }
     else{
 
@@ -56,7 +52,7 @@ export const UserForm = () => {
         email: '',
         password: '',
         password2: '',
-        role: 'user',
+        role: 'admin',
         admin: ''
     
       })
@@ -64,32 +60,37 @@ export const UserForm = () => {
     }
 
   }
-
+  
+  
   return (
     <Form className='text-center' >
-      <h1>Hello new user</h1>
+      <h1>Hello new Admin</h1>
       <Row className="mb-3">
-        <Form.Group as={Col} controlId="formGridEmail">
+        <Form.Group as={Col} controlId="formGrid2Email">
           <Form.Label>First Name</Form.Label>
           <Form.Control onChange={onChange} value={firstName} name='firstName' type="text" placeholder="Enter First Name" />
         </Form.Group>
 
-        <Form.Group as={Col} controlId="formGridPassword">
+        <Form.Group as={Col} controlId="formGrid2Password">
           <Form.Label>Last Name</Form.Label>
           <Form.Control onChange={onChange} value={lastName} name='lastName' type="text" placeholder="Enter Last Name" />
         </Form.Group>
       </Row>
-      <Form.Group className="mb-3" controlId="formGroupEmail">
+      <Form.Group className="mb-3" controlId="formGroup2Email">
         <Form.Label>Email address</Form.Label>
         <Form.Control onChange={onChange} value={email} name='email' type="email" placeholder="Enter email" />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formGroupPassword">
+      <Form.Group className="mb-3" controlId="formGroup2Password">
         <Form.Label>Password</Form.Label>
         <Form.Control onChange={onChange} value={password} name='password' type="password" placeholder="Password" />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formGroupPassword2">
+      <Form.Group className="mb-3" controlId="formGroup2Password2">
         <Form.Label>Confirm password</Form.Label>
         <Form.Control onChange={onChange} value={password2} name='password2' type="password" placeholder="Confirm password" />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formGroup2AdminPassword2">
+        <Form.Label>Confirm password</Form.Label>
+        <Form.Control onChange={onChange} value={admin} name='admin' type="password" placeholder="Admin Password" />
       </Form.Group>
 
       <button className="btn btn-primary" onClick={onSubmit}>

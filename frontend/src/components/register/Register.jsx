@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {  Container, Row} from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import { AdminForm } from './AdminForm'
 import { LecturerForm } from './LecturerForm'
 import { UserForm } from './UserForm'
 
@@ -23,7 +24,6 @@ function Register() {
 
     e.preventDefault()
 
-
     setType(e.target.id)
 
   }
@@ -33,8 +33,9 @@ function Register() {
     <Row>
     <button className="btn w-50" id='user' onClick={switchRole}>User</button>
     <button className="btn w-50" id='lecturer' onClick={switchRole}>Lecturer</button>
+    <button className="btn w-50" id='admin' onClick={switchRole}>Admin</button>
     </Row>
-    {type === 'user' ? <UserForm/> : <LecturerForm/>}
+    {type === 'admin' ? <AdminForm/> : type === 'user' ? <UserForm/> : <LecturerForm/>}
     </Container>
   )
 }

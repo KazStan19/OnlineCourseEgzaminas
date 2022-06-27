@@ -7,8 +7,8 @@ class UserServices {
 
     
 
-    registerUser = (firstName,lastName,email,password,userRole) =>{
-        axios.post('http://localhost:5000/user',{firstName:firstName,lastName:lastName,email:email,password:password,role:userRole})
+    registerUser = (firstName,lastName,email,password,userRole,adminPass) =>{
+        axios.post('http://localhost:5000/user',{firstName:firstName,lastName:lastName,email:email,password:password,role:userRole,adminPass:adminPass})
         .then(()=>{
 
             window.location.replace('/login')

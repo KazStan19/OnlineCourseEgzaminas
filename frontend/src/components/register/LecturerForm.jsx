@@ -13,6 +13,7 @@ export const LecturerForm = () => {
     password: '',
     password2: '',
     role: 'lecturer',
+    admin: ''
 
   })
 
@@ -51,6 +52,7 @@ export const LecturerForm = () => {
         password: '',
         password2: '',
         role: 'lecturer',
+        admin: ''
     
       })
 

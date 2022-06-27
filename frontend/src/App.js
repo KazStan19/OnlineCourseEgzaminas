@@ -40,7 +40,6 @@ function App() {
       <Routes> 
 
         <Route exact path="/" element={loading === false ? <LandingPage loginState={loginState} user={user}/> : <LoadingPage/>}/>
-        <Route path="/filtered/:categoryID" element={loading === false ? <LandingPage loginState={loginState} user={user}/> : <LoadingPage/>}/>
         <Route path="/login" element={<Login state={loginState} setUser={setUser}/>}/>
         <Route path="/register" element={<Register state={loginState}/> }/>
         <Route path="/addCourse"  element={user.role === 'admin' || user.role === 'lecturer'? <AddCourse userId={user._id} role={user.role}/>:null}/>
