@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Card, Col, Container, Row } from 'react-bootstrap'
-import { useParams } from 'react-router-dom'
-import CourseServices from '../services/courseServices'
-import { LoadingPage } from './loadingPage'
+import React, { useEffect, useState } from "react"
+import { Button, Card, Col, Container, Form, Row } from "react-bootstrap"
+import { useParams } from "react-router-dom"
+import CourseServices from "../services/courseServices"
+import { LoadingPage } from "./loadingPage"
 import { AiOutlineRest , AiFillEdit ,AiFillLike} from "react-icons/ai";
-import { UpdateCourse } from './lecturer/updateCourse'
-import UserServices from '../services/userServices'
+import { UpdateCourse } from "./lecturer/updateCourse"
+import UserServices from "../services/userServices"
 
 function LandingPage(props) {
   
@@ -13,7 +13,9 @@ function LandingPage(props) {
   const [updateToggle, setUpdateToggle] = useState(false)
   const [loading, setLoading] = useState(true)
   const [updateCourse, setUpdateCourse] = useState([])
+  const [search, setSearch] = useState("")
   const {categoryID} = useParams()
+
 
   useEffect(() => {
 
@@ -21,10 +23,9 @@ function LandingPage(props) {
 
     CourseServices.getCourses()
     .then(course =>{
-
-      if(categoryID === undefined)setData(course)
-      else setData(course.filter(item => item.categorie._id === categoryID))
-
+      
+      setData(course)
+      
     })
   
     setLoading(false)
@@ -37,6 +38,12 @@ function LandingPage(props) {
 
   }
 
+  const onChange = (e) => {
+
+    setSearch(e.target.value)
+
+  }
+
   if(loading === true){
 
     return(<LoadingPage/>)
@@ -45,19 +52,38 @@ function LandingPage(props) {
   else{
 
     return updateToggle === false ? <Container>
+      <Form className="mb-4">
+
+      <Form.Group as={Col}>
+          <Form.Control className="text-center" onChange={onChange} value={search} type="text" placeholder="search here (eg. lecturer, course catagory)" />
+        </Form.Group>
+
+      </Form>
       <Row xs={1} md={2} className="g-4">
-      {data.map(item =>{
+      { data.filter(courseFiltered => {
+
+          if(search == ""){
+
+              return courseFiltered
+
+          }
+          else if(courseFiltered.user.firstName.toLowerCase().includes(search.toLowerCase()) || courseFiltered.user.lastName.toLowerCase().includes(search.toLowerCase()) || courseFiltered.categorie.name.toLowerCase().includes(search.toLowerCase())){
+
+              return courseFiltered
+
+          }
+          }).map(item =>{
         return(
           <Col key={item._id}>
           <Card >
-            {props.loginState === true && props.user._id === item.user._id || props.user.role === 'admin' ? <div className='w-100 d-flex bg-dark justify-content-end'>
-              <a href='#' className='text-white' onClick={(e)=>{
+            {props.loginState === true && props.user._id === item.user._id || props.user.role === "admin" ? <div className="w-100 d-flex bg-dark justify-content-end">
+              <a href="#" className="text-white" onClick={(e)=>{
 
                 e.preventDefault()
                 deleteHandler(item._id)
 
               }}><AiOutlineRest/></a>
-              <a href='#' className='text-white' onClick={(e)=>{
+              <a href="#" className="text-white" onClick={(e)=>{
 
                 e.preventDefault()
                 setUpdateCourse(item)
@@ -77,8 +103,8 @@ function LandingPage(props) {
               {item.desc}
               </Card.Text>
               </Card.Body>
-              <Card.Body className='d-flex justify-content-between'>
-                <Card.Text as='h3'>
+              <Card.Body className="d-flex justify-content-between">
+                <Card.Text as="h3">
                 {`${item.price} eur`}
                 </Card.Text>
                 {
@@ -96,14 +122,19 @@ function LandingPage(props) {
                 }}>Cancal</Button>:null
               }
               </Card.Body>
-              {props.loginState === true && props.user._id === item.user._id || props.user.role === 'admin' ? <div className='w-100 d-flex bg-dark justify-content-end'>
-              <a href='#' className='text-white text-decoration-none' onClick={(e)=>{
+              {props.loginState === true && props.user._id === item.user._id || props.user.role === "admin" ? <div className="w-100 d-flex bg-dark justify-content-end">
+              <a href="#" className="text-white text-decoration-none m-1" onClick={(e)=>{
 
                 e.preventDefault()
-                if(item.likes.includes(props.user._id) === true)CourseServices.likeCourse(item._id,props.user._id,'minus')
-                else CourseServices.likeCourse(item._id,props.user._id,'plus')
+                if(item.likes.includes(props.user._id) === true)CourseServices.likeCourse(item._id,props.user._id,"minus")
+                else CourseServices.likeCourse(item._id,props.user._id,"plus")
               }}><AiFillLike/>{item.likeCount}</a>
-            </div>:null}
+            </div>:<div className="w-100 d-flex bg-dark justify-content-end">
+              <p  className="text-white m-1" onClick={(e)=>{
+                e.preventDefault()
+                alert("please login to use this function")
+              }}><AiFillLike/>{item.likeCount}</p>
+            </div>}
             </Card>
             </Col>
         )
