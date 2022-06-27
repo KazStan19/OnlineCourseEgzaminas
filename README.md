@@ -25,7 +25,6 @@ A port can be any number you so choice (it can be 5000, 8080 and etc.)
 
 - Add a string of later or number to `JWT_SECRET` section (the longer the string the better)
 
-- ### Create a database
 
 Next you'll need connection string from https://cloud.mongodb.com/. To do this first you need to create a new database, you can do so by following the steps below.
 
@@ -46,6 +45,7 @@ Next you'll need connection string from https://cloud.mongodb.com/. To do this f
 - And add your password to the connection string (`<` and `>` must be deleted)
 - add `ADMIN_PASS` it can be anything you want
 
+
 - add mongoDB database connection string to `MONGO_DB`
 
 ### To start
@@ -58,6 +58,8 @@ To start the application you must be in the root folder
 
 ### To add a admin account
 
+
 - when creating admin you must make `ADMIN_PASS` in `.env`
+
 or
 Using `Postman`
